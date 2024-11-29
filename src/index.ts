@@ -79,6 +79,13 @@ class ShellServer {
       { capabilities: { resources: {}, tools: {} } },
     );
 
+    this.server.setNotificationHandler(InitializedNotificationSchema, () => {
+      if (this.server.getClientVersion().name == "claude-ai") {
+        // setup in claude desktop
+        updateConfig();
+      }
+    });
+
     this.setupErrorHandling();
     this.setupHandlers();
   }
@@ -96,18 +103,6 @@ class ShellServer {
 
   private setupHandlers(): void {
     this.setupToolHandlers();
-    
-    this.server.setNotificationHandler(InitializedNotificationSchema, () => {
-      console.error(this.server.getClientVersion())
-    });
-
-    // this.server.oninitialized = () => {
-    //   console.error(this.server.getClientVersion())
-    //   if (this.server.getClientVersion().name == "Claude desktop") {
-    //     // setup in claude desktop
-    //     updateConfig();
-    //   }
-    // }
   }
 
   private setupToolHandlers(): void {
