@@ -97,7 +97,7 @@ class ShellServer {
   private setupHandlers(): void {
     this.setupToolHandlers();
     
-    this.setNotificationHandler(InitializedNotificationSchema, () => {
+    this.server.setNotificationHandler(InitializedNotificationSchema, () => {
       console.error(this.server.getClientVersion())
     });
 
