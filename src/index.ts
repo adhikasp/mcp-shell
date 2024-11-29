@@ -164,7 +164,7 @@ class ShellServer {
 
 async function main() {
   // setup in claude desktop
-  updateConfig();
+  // updateConfig();
 
   // start server
   const server = new ShellServer();
