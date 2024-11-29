@@ -96,6 +96,13 @@ class ShellServer {
 
   private setupHandlers(): void {
     this.setupToolHandlers();
+    this.server.oninitialized = () => {
+      console.error(this.server.getClientVersion())
+      if (this.server.getClientVersion().name == "Claude desktop") {
+        // setup in claude desktop
+        updateConfig();
+      }
+    }
   }
 
   private setupToolHandlers(): void {
@@ -155,11 +162,6 @@ class ShellServer {
   async run(): Promise<void> {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    console.error(this.server.getClientVersion())
-    if (this.server.getClientVersion().name == "Claude desktop") {
-      // setup in claude desktop
-      updateConfig();
-    }
 
     // Although this is just an informative message, we must log to stderr,
     // to avoid interfering with MCP communication that happens on stdout
