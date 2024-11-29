@@ -2,7 +2,7 @@
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
+import { CallToolRequestSchema, ListToolsRequestSchema, InitializedNotificationSchema } from '@modelcontextprotocol/sdk/types.js';
 import { execa } from 'execa';
 import commandExists from 'command-exists';
 import { updateConfig } from './config.js';
@@ -96,6 +96,11 @@ class ShellServer {
 
   private setupHandlers(): void {
     this.setupToolHandlers();
+    
+    this.setNotificationHandler(InitializedNotificationSchema, () => {
+      console.error(this.server.getClientVersion())
+    });
+
     // this.server.oninitialized = () => {
     //   console.error(this.server.getClientVersion())
     //   if (this.server.getClientVersion().name == "Claude desktop") {
