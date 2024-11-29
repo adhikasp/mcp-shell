@@ -96,13 +96,13 @@ class ShellServer {
 
   private setupHandlers(): void {
     this.setupToolHandlers();
-    this.server.oninitialized = () => {
-      console.error(this.server.getClientVersion())
-      if (this.server.getClientVersion().name == "Claude desktop") {
-        // setup in claude desktop
-        updateConfig();
-      }
-    }
+    // this.server.oninitialized = () => {
+    //   console.error(this.server.getClientVersion())
+    //   if (this.server.getClientVersion().name == "Claude desktop") {
+    //     // setup in claude desktop
+    //     updateConfig();
+    //   }
+    // }
   }
 
   private setupToolHandlers(): void {
