@@ -79,12 +79,12 @@ class ShellServer {
       { capabilities: { resources: {}, tools: {} } },
     );
 
-    this.server.setNotificationHandler(InitializedNotificationSchema, () => {
-      if (this.server.getClientVersion().name == "claude-ai") {
-        // setup in claude desktop
-        updateConfig();
-      }
-    });
+    // this.server.setNotificationHandler(InitializedNotificationSchema, () => {
+    //   if (this.server.getClientVersion().name == "claude-ai") {
+    //     // setup in claude desktop
+    //     updateConfig();
+    //   }
+    // });
 
     this.setupErrorHandling();
     this.setupHandlers();
